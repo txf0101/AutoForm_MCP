@@ -1,0 +1,19 @@
+[project]
+name = "autoform-mcp"
+version = "1.1.0"
+description = "Standalone stdio MCP server for local AutoForm helper workflows."
+requires-python = ">=3.10"
+dependencies = [
+  "mcp>=1.0.0",
+  "openai>=2.0,<3.0",
+  "openai-agents>=0.6.0",
+  "pillow>=10.0",
+  "psutil>=5.9",
+  "python-docx>=1.1",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

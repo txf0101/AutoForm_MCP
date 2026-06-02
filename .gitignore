@@ -1,0 +1,12 @@
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env
+.env.*
+!.env.example
+
+autoform_agent_data/
+tmp/
+output/
+tmp_material_install_check/
+log_AFFormingJob_*.txt
