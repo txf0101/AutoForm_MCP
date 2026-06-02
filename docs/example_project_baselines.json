@@ -1,0 +1,736 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-05-25T15:53:07.625096+00:00",
+  "execute": false,
+  "example_count": 7,
+  "examples": [
+    {
+      "name": "AutoComp_R13.afd",
+      "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\AutoComp_R13.afd",
+      "summary": {
+        "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\AutoComp_R13.afd",
+        "name": "AutoComp_R13.afd",
+        "size_bytes": 14846042,
+        "source": "afd_readable_index_candidate",
+        "project_name": "AutoForm Forming R13 AutoComp Test File",
+        "created": "June 2025",
+        "last_modified_field": null,
+        "comment": null,
+        "feature_name": "Generic Draw Region",
+        "operation_name": null,
+        "material": {
+          "name": "DC04",
+          "string": "Constant DC04/1.0000mm",
+          "thickness": "1.0000",
+          "type": "Constant"
+        },
+        "usage": {
+          "die_face": "Not used",
+          "formcheck": null,
+          "hemming": null,
+          "hotforming": null,
+          "multiblank": null,
+          "phase_change": null,
+          "reporting": null,
+          "triboform": "Used"
+        },
+        "total_string_count": 64430,
+        "candidate_field_count": 27,
+        "note": "Values are candidates extracted from printable .afd fragments and should be cross-checked with QuickLink or official exports before simulation decisions."
+      },
+      "kinematic": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 120,
+        "working_dir": "output/project_runs/<timestamp>_AutoComp_R13_kinematic",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\AutoComp_R13.afd",
+            "plan": {
+              "kind": "forming-solver-kinematic-check",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\AutoComp_R13",
+                "-a",
+                "-puse",
+                "1",
+                "-k"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a, -puse and -k options. Runtime evidence shows -a is a flag and -jn receives the path stem because AutoForm appends .afd.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      },
+      "full": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 300,
+        "working_dir": "output/project_runs/<timestamp>_AutoComp_R13_full",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\AutoComp_R13.afd",
+            "plan": {
+              "kind": "forming-solver-full-solve",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\AutoComp_R13",
+                "-a",
+                "-puse",
+                "1"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a and -puse options. Runtime evidence on copied official examples shows the default no -k form performs a full solve and returns Program END 0.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "PhaseChange_R13.afd",
+      "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\PhaseChange_R13.afd",
+      "summary": {
+        "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\PhaseChange_R13.afd",
+        "name": "PhaseChange_R13.afd",
+        "size_bytes": 10667546,
+        "source": "afd_readable_index_candidate",
+        "project_name": "AutoForm Forming R13 PhaseChange Plug-in Test File",
+        "created": "June 2025",
+        "last_modified_field": null,
+        "comment": null,
+        "feature_name": "Draw Region 1",
+        "operation_name": null,
+        "material": {
+          "name": "22MnB5",
+          "string": "Constant 22MnB5/1.0000mm",
+          "thickness": "1.0000",
+          "type": "Constant"
+        },
+        "usage": {
+          "die_face": "Used",
+          "formcheck": "Not used",
+          "hemming": null,
+          "hotforming": null,
+          "multiblank": null,
+          "phase_change": null,
+          "reporting": null,
+          "triboform": "Not used"
+        },
+        "total_string_count": 25804,
+        "candidate_field_count": 27,
+        "note": "Values are candidates extracted from printable .afd fragments and should be cross-checked with QuickLink or official exports before simulation decisions."
+      },
+      "kinematic": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 120,
+        "working_dir": "output/project_runs/<timestamp>_PhaseChange_R13_kinematic",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\PhaseChange_R13.afd",
+            "plan": {
+              "kind": "forming-solver-kinematic-check",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\PhaseChange_R13",
+                "-a",
+                "-puse",
+                "1",
+                "-k"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a, -puse and -k options. Runtime evidence shows -a is a flag and -jn receives the path stem because AutoForm appends .afd.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      },
+      "full": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 300,
+        "working_dir": "output/project_runs/<timestamp>_PhaseChange_R13_full",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\PhaseChange_R13.afd",
+            "plan": {
+              "kind": "forming-solver-full-solve",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\PhaseChange_R13",
+                "-a",
+                "-puse",
+                "1"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a and -puse options. Runtime evidence on copied official examples shows the default no -k form performs a full solve and returns Program END 0.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Sigma_R13.afd",
+      "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Sigma_R13.afd",
+      "summary": {
+        "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Sigma_R13.afd",
+        "name": "Sigma_R13.afd",
+        "size_bytes": 13580873,
+        "source": "afd_readable_index_candidate",
+        "project_name": "AutoForm Forming R13 Sigma Test File",
+        "created": "June 2025",
+        "last_modified_field": null,
+        "comment": null,
+        "feature_name": "Draw Region 1",
+        "operation_name": null,
+        "material": {
+          "name": "DX54D",
+          "string": "Constant DX54D/1.0000mm",
+          "thickness": "1.0000",
+          "type": "Constant"
+        },
+        "usage": {
+          "die_face": "Used",
+          "formcheck": "Not used",
+          "hemming": null,
+          "hotforming": null,
+          "multiblank": null,
+          "phase_change": null,
+          "reporting": null,
+          "triboform": "Variant History Ids*{8976D65D-712B-4F0B-82C1-89B978AA3909}"
+        },
+        "total_string_count": 50701,
+        "candidate_field_count": 27,
+        "note": "Values are candidates extracted from printable .afd fragments and should be cross-checked with QuickLink or official exports before simulation decisions."
+      },
+      "kinematic": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 120,
+        "working_dir": "output/project_runs/<timestamp>_Sigma_R13_kinematic",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Sigma_R13.afd",
+            "plan": {
+              "kind": "forming-solver-kinematic-check",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Sigma_R13",
+                "-a",
+                "-puse",
+                "1",
+                "-k"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a, -puse and -k options. Runtime evidence shows -a is a flag and -jn receives the path stem because AutoForm appends .afd.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      },
+      "full": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 300,
+        "working_dir": "output/project_runs/<timestamp>_Sigma_R13_full",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Sigma_R13.afd",
+            "plan": {
+              "kind": "forming-solver-full-solve",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Sigma_R13",
+                "-a",
+                "-puse",
+                "1"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a and -puse options. Runtime evidence on copied official examples shows the default no -k form performs a full solve and returns Program END 0.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Solver_R13.afd",
+      "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Solver_R13.afd",
+      "summary": {
+        "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Solver_R13.afd",
+        "name": "Solver_R13.afd",
+        "size_bytes": 13777919,
+        "source": "afd_readable_index_candidate",
+        "project_name": "AutoForm Forming R13 Solver Test File",
+        "created": "June 2025",
+        "last_modified_field": null,
+        "comment": null,
+        "feature_name": "Draw Region 1",
+        "operation_name": null,
+        "material": {
+          "name": "DC04",
+          "string": "Constant DC04/1.0000mm",
+          "thickness": "1.0000",
+          "type": "Constant"
+        },
+        "usage": {
+          "die_face": "Used",
+          "formcheck": "Not used",
+          "hemming": null,
+          "hotforming": null,
+          "multiblank": null,
+          "phase_change": null,
+          "reporting": null,
+          "triboform": "Not used"
+        },
+        "total_string_count": 52848,
+        "candidate_field_count": 27,
+        "note": "Values are candidates extracted from printable .afd fragments and should be cross-checked with QuickLink or official exports before simulation decisions."
+      },
+      "kinematic": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 120,
+        "working_dir": "output/project_runs/<timestamp>_Solver_R13_kinematic",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Solver_R13.afd",
+            "plan": {
+              "kind": "forming-solver-kinematic-check",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Solver_R13",
+                "-a",
+                "-puse",
+                "1",
+                "-k"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a, -puse and -k options. Runtime evidence shows -a is a flag and -jn receives the path stem because AutoForm appends .afd.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      },
+      "full": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 300,
+        "working_dir": "output/project_runs/<timestamp>_Solver_R13_full",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Solver_R13.afd",
+            "plan": {
+              "kind": "forming-solver-full-solve",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Solver_R13",
+                "-a",
+                "-puse",
+                "1"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a and -puse options. Runtime evidence on copied official examples shows the default no -k form performs a full solve and returns Program END 0.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Thermo_R13.afd",
+      "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Thermo_R13.afd",
+      "summary": {
+        "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Thermo_R13.afd",
+        "name": "Thermo_R13.afd",
+        "size_bytes": 21053436,
+        "source": "afd_readable_index_candidate",
+        "project_name": "AutoForm Forming R13 Thermo Plug-In Test File",
+        "created": "June 2025",
+        "last_modified_field": null,
+        "comment": null,
+        "feature_name": "Draw Region 1",
+        "operation_name": null,
+        "material": {
+          "name": "DX57-GI_Vegter+thermo_0.4-0.8",
+          "string": "Constant DX57-GI_Vegter+thermo_0.4-0.8/1.0000mm",
+          "thickness": "1.0000",
+          "type": "Constant"
+        },
+        "usage": {
+          "die_face": "Used",
+          "formcheck": "Not used",
+          "hemming": null,
+          "hotforming": null,
+          "multiblank": null,
+          "phase_change": null,
+          "reporting": null,
+          "triboform": "Not used"
+        },
+        "total_string_count": 96683,
+        "candidate_field_count": 27,
+        "note": "Values are candidates extracted from printable .afd fragments and should be cross-checked with QuickLink or official exports before simulation decisions."
+      },
+      "kinematic": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 120,
+        "working_dir": "output/project_runs/<timestamp>_Thermo_R13_kinematic",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Thermo_R13.afd",
+            "plan": {
+              "kind": "forming-solver-kinematic-check",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Thermo_R13",
+                "-a",
+                "-puse",
+                "1",
+                "-k"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a, -puse and -k options. Runtime evidence shows -a is a flag and -jn receives the path stem because AutoForm appends .afd.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      },
+      "full": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 300,
+        "working_dir": "output/project_runs/<timestamp>_Thermo_R13_full",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Thermo_R13.afd",
+            "plan": {
+              "kind": "forming-solver-full-solve",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Thermo_R13",
+                "-a",
+                "-puse",
+                "1"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a and -puse options. Runtime evidence on copied official examples shows the default no -k form performs a full solve and returns Program END 0.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Triboform_R13.afd",
+      "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Triboform_R13.afd",
+      "summary": {
+        "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Triboform_R13.afd",
+        "name": "Triboform_R13.afd",
+        "size_bytes": 14882650,
+        "source": "afd_readable_index_candidate",
+        "project_name": "AutoForm Forming R13 TriboForm Plug-In Test File",
+        "created": "June 2025",
+        "last_modified_field": null,
+        "comment": null,
+        "feature_name": "Draw Region 1",
+        "operation_name": null,
+        "material": {
+          "name": "DX54D",
+          "string": "Constant DX54D/1.0000mm",
+          "thickness": "1.0000",
+          "type": "Constant"
+        },
+        "usage": {
+          "die_face": "Used",
+          "formcheck": "Not used",
+          "hemming": null,
+          "hotforming": null,
+          "multiblank": null,
+          "phase_change": null,
+          "reporting": null,
+          "triboform": "Used"
+        },
+        "total_string_count": 61258,
+        "candidate_field_count": 27,
+        "note": "Values are candidates extracted from printable .afd fragments and should be cross-checked with QuickLink or official exports before simulation decisions."
+      },
+      "kinematic": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 120,
+        "working_dir": "output/project_runs/<timestamp>_Triboform_R13_kinematic",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Triboform_R13.afd",
+            "plan": {
+              "kind": "forming-solver-kinematic-check",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Triboform_R13",
+                "-a",
+                "-puse",
+                "1",
+                "-k"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a, -puse and -k options. Runtime evidence shows -a is a flag and -jn receives the path stem because AutoForm appends .afd.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      },
+      "full": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 300,
+        "working_dir": "output/project_runs/<timestamp>_Triboform_R13_full",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Triboform_R13.afd",
+            "plan": {
+              "kind": "forming-solver-full-solve",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Triboform_R13",
+                "-a",
+                "-puse",
+                "1"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a and -puse options. Runtime evidence on copied official examples shows the default no -k form performs a full solve and returns Program END 0.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Trim_R13.afd",
+      "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Trim_R13.afd",
+      "summary": {
+        "path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Trim_R13.afd",
+        "name": "Trim_R13.afd",
+        "size_bytes": 13118743,
+        "source": "afd_readable_index_candidate",
+        "project_name": "AutoForm Forming R13 Trim Test File",
+        "created": "June 2025",
+        "last_modified_field": null,
+        "comment": null,
+        "feature_name": "Draw Region 1",
+        "operation_name": null,
+        "material": {
+          "name": "DX54D",
+          "string": "Constant DX54D/1.0000mm",
+          "thickness": "1.0000",
+          "type": "Constant"
+        },
+        "usage": {
+          "die_face": "Used",
+          "formcheck": "Not used",
+          "hemming": null,
+          "hotforming": null,
+          "multiblank": null,
+          "phase_change": null,
+          "reporting": null,
+          "triboform": "Not used"
+        },
+        "total_string_count": 44729,
+        "candidate_field_count": 27,
+        "note": "Values are candidates extracted from printable .afd fragments and should be cross-checked with QuickLink or official exports before simulation decisions."
+      },
+      "kinematic": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 120,
+        "working_dir": "output/project_runs/<timestamp>_Trim_R13_kinematic",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Trim_R13.afd",
+            "plan": {
+              "kind": "forming-solver-kinematic-check",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Trim_R13",
+                "-a",
+                "-puse",
+                "1",
+                "-k"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a, -puse and -k options. Runtime evidence shows -a is a flag and -jn receives the path stem because AutoForm appends .afd.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      },
+      "full": {
+        "case_count": 1,
+        "threads": 1,
+        "executed": false,
+        "timeout_per_case": 300,
+        "working_dir": "output/project_runs/<timestamp>_Trim_R13_full",
+        "extra_env_keys": [
+          "AF_HOME_LIB"
+        ],
+        "cases": [
+          {
+            "afd_path": "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Trim_R13.afd",
+            "plan": {
+              "kind": "forming-solver-full-solve",
+              "command": [
+                "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+                "-jn",
+                "%PROGRAMDATA%\\AutoForm\\AFplus\\R13F\\test\\Trim_R13",
+                "-a",
+                "-puse",
+                "1"
+              ],
+              "executable": "<autoform-install-dir>\\bin\\AFFormingSolver.exe",
+              "executable_exists": true,
+              "evidence": "Uses confirmed -jn, -a and -puse options. Runtime evidence on copied official examples shows the default no -k form performs a full solve and returns Program END 0.",
+              "requires_confirmation": true,
+              "recommended_env": {
+                "AF_HOME_LIB": "<autoform-install-dir>\\bin"
+              }
+            },
+            "executed": false
+          }
+        ]
+      }
+    }
+  ]
+}

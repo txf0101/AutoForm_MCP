@@ -1,0 +1,21 @@
+# AutoForm_MCP MCP_V1.1 config snippet for Codex or another TOML-based MCP host.
+#
+# Copy this block into:
+#   %USERPROFILE%\.codex\config.toml
+#
+# Replace <repo-root> with the absolute path of this cloned repository
+# on the current computer. Do not reuse another user's absolute path.
+# Then restart the MCP host so it can launch the stdio MCP server.
+#
+# If the host cannot find conda, replace command with the full path to
+# your afagent environment python.exe and change args to:
+#   ['-m', 'autoform_agent.mcp_server']
+
+[mcp_servers."autoform-mcp"]
+command = 'conda'
+args = ['run', '-n', 'afagent', 'python', '-m', 'autoform_agent.mcp_server']
+startup_timeout_sec = 60
+enabled = true
+
+[mcp_servers."autoform-mcp".env]
+PYTHONPATH = '<repo-root>'
