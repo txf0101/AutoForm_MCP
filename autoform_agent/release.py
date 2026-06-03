@@ -29,6 +29,7 @@ REQUIRED_RELEASE_FILES = [
     "codex_mcp_config.autoform-mcp.toml",
     "docs/beginner_onboarding_zh.md",
     "docs/api_runtime_call_chain.md",
+    "docs/gui_result_review_scope.md",
 ]
 
 PACKAGE_INCLUDE_DIRS = ["autoform_agent", "docs", "tests"]

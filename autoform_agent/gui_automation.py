@@ -448,7 +448,7 @@ def visible_window_control_demo(
                 "fact": "R12 keeps AutoForm adapter actions reserved behind approval, dry-run and simulated-event boundaries.",
             },
             {
-                "path": "docs/v1_1_gui_result_review_goals.md",
+                "path": "docs/gui_result_review_scope.md",
                 "fact": "Visible GUI primitives are used for explicit user-visible AutoForm result-review actions.",
             },
             {

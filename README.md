@@ -77,9 +77,9 @@ enabled = true
 PYTHONPATH = '<repo-root>'
 ```
 
-Common Windows examples are `C:\Users\<user>\miniconda3\envs\afagent\python.exe` and `C:\ProgramData\miniconda3\envs\afagent\python.exe`. Use the path that exists on the target computer.
+Common Windows examples are `%USERPROFILE%\miniconda3\envs\afagent\python.exe` and `%ProgramData%\miniconda3\envs\afagent\python.exe`. Use the path that exists on the target computer.
 
-Windows 上常见位置包括 `C:\Users\<user>\miniconda3\envs\afagent\python.exe` 和 `C:\ProgramData\miniconda3\envs\afagent\python.exe`。以目标电脑真实存在的路径为准。
+Windows 上常见位置包括 `%USERPROFILE%\miniconda3\envs\afagent\python.exe` 和 `%ProgramData%\miniconda3\envs\afagent\python.exe`。以目标电脑真实存在的路径为准。
 
 ## Claude Code
 
