@@ -170,9 +170,10 @@ def autoform_r12_project_view_demo(
     wait_seconds: float = 2.0,
     view_wait_seconds: float = 0.5,
     verify_screenshot: bool = True,
+    view_sequence: str | list[str] | None = None,
     output_dir: str = "tmp/r12_project_view_demo",
 ) -> dict:
-    """Plan or run the R12 project-open, top-view, isometric-view demo."""
+    """Plan or run the R12 project-open and requested view-switch demo."""
 
     return r12_project_view_demo(
         example_name=example,
@@ -181,6 +182,7 @@ def autoform_r12_project_view_demo(
         wait_seconds=wait_seconds,
         view_wait_seconds=view_wait_seconds,
         verify_screenshot=verify_screenshot,
+        view_sequence=view_sequence,
         output_dir=output_dir,
     )
 
@@ -274,10 +276,19 @@ def autoform_result_set_view(
     execute: bool = False,
     verify_screenshot: bool = True,
     output_dir: str = "tmp/result_review",
+    title_contains: str | None = None,
+    target_pid: int | None = None,
 ) -> dict:
     """Map, plan, or execute a profiled result view shortcut."""
 
-    return set_result_view(view, execute=execute, verify_screenshot=verify_screenshot, output_dir=output_dir)
+    return set_result_view(
+        view,
+        execute=execute,
+        verify_screenshot=verify_screenshot,
+        output_dir=output_dir,
+        title_contains=title_contains,
+        target_pid=target_pid,
+    )
 
 
 def autoform_result_view_evidence(

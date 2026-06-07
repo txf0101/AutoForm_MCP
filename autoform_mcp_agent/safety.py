@@ -20,7 +20,7 @@ SECRET_PATTERNS = {
     "github_token": re.compile(r"gh[pousr]_[A-Za-z0-9_]{20,}"),
     "generic_assignment": re.compile(r"(?i)(api[_-]?key|token|secret)\s*=\s*['\"]?([A-Za-z0-9_./:+-]{16,})"),
 }
-SKIP_DIRS = {".git", ".pytest_cache", "__pycache__", "tmp", "output", "autoform_agent_data"}
+SKIP_DIRS = {".git", ".pytest_cache", "__pycache__", "tmp", "output", "autoform_mcp_agent_data"}
 TEXT_EXTENSIONS = {".py", ".md", ".toml", ".yml", ".yaml", ".json", ".js", ".css", ".html", ".ps1", ".cmd", ".txt", ".example"}
 
 

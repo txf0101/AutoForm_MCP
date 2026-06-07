@@ -5,7 +5,10 @@ This package exposes the public Python entry points for AutoForm_MCP. External c
 
 from .paths import AutoFormInstallation, discover_installations, get_default_installation
 
+__version__ = "1.8.0"
+
 __all__ = [
+    "__version__",
     "AutoFormInstallation",
     "discover_installations",
     "get_default_installation",

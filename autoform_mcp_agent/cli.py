@@ -1,10 +1,24 @@
-"""这个文件提供命令行入口。用户在 PowerShell 或 cmd 里输入 `python -m autoform_agent.cli ...` 时，会先到这里。
+"""AutoForm Agent 的命令行入口文件。
 
-This file provides the command-line interface. When a user runs `python -m autoform_agent.cli ...` in PowerShell or cmd, execution reaches this file first.
+给零代码基础读者的阅读路线：
 
-命令行只负责解析参数和打印结果，真正的 AutoForm 规则放在各个业务模块中。这样 CLI 和 MCP 可以共用同一套可靠函数。
+- 这个文件是 CLI 入口。用户在 PowerShell 或 cmd 里输入
+  `python -m autoform_mcp_agent.cli ...` 时，Python 会加载这里的 `main()`。
+- CLI 可以理解成“前台登记窗口”：它登记用户说的命令名，收集参数，然后把事情交给真正干活的业务函数。
+- 真正启动 AutoForm、打开 .afd、安装材料、整理结果证据的逻辑，放在 `process.py`、`materials.py`、
+  `result_viewer.py` 等业务文件中。这样 CLI 和 MCP 工具可以复用同一套函数。
+- `subparsers.add_parser(...)` 是“登记一个命令名”。登记之后，用户才能在命令行里输入这个名字。
+- `xxx_parser.add_argument(...)` 是“登记这个命令需要哪些参数”。
+- `if args.command == "...":` 是“执行分发”。参数解析完成后，代码在这里判断用户输入的是哪个命令。
 
-The CLI only parses arguments and prints results. Real AutoForm rules live in the business modules so CLI and MCP can reuse the same reliable functions.
+本文件里和四个演示案例的关系：
+
+- 演示口径 `autoform start ui`：在当前 CLI 里对应真实子命令 `start-ui`。
+- 演示口径 `autoform open afd`：在当前 CLI 里对应真实子命令 `open-afd`。
+- 演示口径 `autoform install materials`：在当前 CLI 里对应真实子命令 `install-materials`。
+- 演示口径 `autoform result set view`：当前 CLI 文件没有登记这个子命令；它是 MCP 工具层能力，
+  入口在 `AutoForm_MCP/autoform_mcp_agent/mcp_tools/gui.py` 的 `autoform_result_set_view()`，
+  实际执行函数在 `AutoForm_MCP/autoform_mcp_agent/result_viewer.py` 的 `set_result_view()`。
 """
 
 from __future__ import annotations
@@ -58,6 +72,9 @@ from .materials import (
     result_to_json,
 )
 from .paths import discover_installations, get_default_installation
+# 这几个导入是演示案例 1 和案例 2 的真正业务函数来源：
+# - `start_forming_ui()`：准备或执行启动 AutoForm Forming UI 的命令。
+# - `open_afd()`：准备或执行打开一个 .afd 项目的命令。
 from .process import collect_forming_job_logs, forming_job_plan, open_afd, run_forming_job, start_forming_ui
 from .project_workflow import example_project_baseline, project_run_workflow, resolve_project_input
 from .queue import lsf_command_plan, queue_client_probe, queue_command_plan, queue_health_check
@@ -99,7 +116,13 @@ from .solver import (
 
 def main(argv: list[str] | None = None) -> int:
     """Parse command-line arguments, dispatch one subcommand, and return an exit code."""
+    # `argparse.ArgumentParser` 是 Python 标准库里的命令行解析器。
+    # `prog="autoform-mcp"` 只决定帮助信息里显示的程序名，不决定 Python 包名。
     parser = argparse.ArgumentParser(prog="autoform-mcp")
+
+    # `subparsers` 是所有子命令的登记册。
+    # 后面每出现一次 `subparsers.add_parser("某个名字")`，CLI 就多认识一个命令。
+    # 例如登记 `"start-ui"` 后，用户才能输入 `python -m autoform_mcp_agent.cli start-ui`。
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     subparsers.add_parser("discover", help="Find local AutoForm installations.")
@@ -119,10 +142,21 @@ def main(argv: list[str] | None = None) -> int:
     archive_parser.add_argument("archive", type=Path)
     archive_parser.add_argument("--limit", type=int)
 
+    # 演示案例 1：`autoform start ui`
+    # 当前 argparse 真实命令名是 `start-ui`，完整运行形式通常是：
+    # `python -m autoform_mcp_agent.cli start-ui --dry-run`
+    # 这里只负责登记命令名和参数；真正准备启动命令的位置在本文件下方
+    # `if args.command == "start-ui"`，业务函数在 `process.py:start_forming_ui()`。
     start_parser = subparsers.add_parser("start-ui", help="Start AutoForm Forming.")
     start_parser.add_argument("--graphics", default="directx11", choices=["directx11", "opengl2"])
     start_parser.add_argument("--dry-run", action="store_true")
 
+    # 演示案例 2：`autoform open afd`
+    # 当前 argparse 真实命令名是 `open-afd`，完整运行形式通常是：
+    # `python -m autoform_mcp_agent.cli open-afd path/to/project.afd --dry-run`
+    # `afd` 是一个必须提供的位置参数，类型是 `Path`，表示 .afd 项目文件路径。
+    # 真正准备打开项目的位置在本文件下方 `if args.command == "open-afd"`，
+    # 业务函数在 `process.py:open_afd()`。
     open_parser = subparsers.add_parser("open-afd", help="Open an AutoForm .afd project.")
     open_parser.add_argument("afd", type=Path)
     open_parser.add_argument("--dry-run", action="store_true")
@@ -189,6 +223,13 @@ def main(argv: list[str] | None = None) -> int:
 
     subparsers.add_parser("jobs", help="List lifecycle-managed jobs.")
 
+    # 演示案例 3：`autoform install materials`
+    # 当前 argparse 真实命令名是 `install-materials`，完整运行形式通常是：
+    # `python -m autoform_mcp_agent.cli install-materials path/to/materials --dry-run`
+    # `source` 是材料来源目录或文件；`--library-name` 可以指定导入后的库名；
+    # `--target-dir` 可以指定目标目录；`--json` 让输出变成完整 JSON，适合给脚本或测试读取。
+    # 真正安装或规划安装的位置在本文件下方 `if args.command == "install-materials"`，
+    # 业务函数在 `materials.py:install_material_library()`。
     material_parser = subparsers.add_parser("install-materials", help="Install .mat/.mtb materials.")
     material_parser.add_argument("source", type=Path)
     material_parser.add_argument("--library-name")
@@ -431,6 +472,12 @@ def main(argv: list[str] | None = None) -> int:
     report_plan_parser = subparsers.add_parser("report-office-plan", help="Preview an AFReportMSOffice command.")
     report_plan_parser.add_argument("args", nargs=argparse.REMAINDER)
 
+    # 演示案例 4：`autoform result set view`
+    # 这个能力需要控制已经打开的 AutoForm GUI，所以当前独立 CLI 没有登记 `result-set-view` 子命令。
+    # MCP 客户端调用的是工具函数，不走命令行字符串解析：
+    # - MCP wrapper 入口：`AutoForm_MCP/autoform_mcp_agent/mcp_tools/gui.py:autoform_result_set_view()`
+    # - 实际执行函数：`AutoForm_MCP/autoform_mcp_agent/result_viewer.py:set_result_view()`
+    # 下面这些 `result-inventory`、`result-evidence-copy` 等命令只负责读取或整理结果证据。
     report_inventory_parser = subparsers.add_parser("report-inventory", help="Inspect report and result-view evidence.")
     report_inventory_parser.add_argument("--bin-dir", type=Path)
     report_inventory_parser.add_argument("--templates-root", type=Path)
@@ -497,7 +544,16 @@ def main(argv: list[str] | None = None) -> int:
 
     subparsers.add_parser("module-coverage", help="Print Agent module coverage matrix.")
 
+    # 到这里，所有 CLI 能识别的命令名和参数都已经登记完。
+    # `parse_args()` 会读取用户输入，并把结果放进 `args` 对象。
+    # 例如用户输入 `start-ui --dry-run` 后，`args.command == "start-ui"`，
+    # `args.dry_run == True`。
     args = parser.parse_args(argv)
+
+    # 下面是执行分发区。
+    # 可以按“登记区 add_parser -> 分发区 if args.command -> 业务函数”的顺序理解每条命令。
+    # 这个结构对 MCP 讲解很有用：CLI wrapper 从文本命令开始，MCP wrapper 从工具函数调用开始，
+    # 两者最终都应该落到同一批业务函数上。
 
     if args.command == "discover":
         installs = [install.as_dict() for install in discover_installations()]
@@ -554,11 +610,17 @@ def main(argv: list[str] | None = None) -> int:
             print(member)
         return 0
 
+    # 演示案例 1 的执行位置：
+    # 用户选择 `start-ui` 后，CLI 把 `--graphics` 和 `--dry-run` 交给 `start_forming_ui()`。
+    # `--dry-run` 为真时只返回将要执行的命令；不实际启动 AutoForm GUI。
     if args.command == "start-ui":
         command = start_forming_ui(graphics=args.graphics, dry_run=args.dry_run)
         print(json.dumps(command, ensure_ascii=False))
         return 0
 
+    # 演示案例 2 的执行位置：
+    # 用户选择 `open-afd` 后，CLI 把 .afd 路径和 `--dry-run` 交给 `open_afd()`。
+    # 路径校验、命令拼装和是否执行，由 `process.py` 里的业务函数负责。
     if args.command == "open-afd":
         command = open_afd(args.afd, dry_run=args.dry_run)
         print(json.dumps(command, ensure_ascii=False))
@@ -651,6 +713,9 @@ def main(argv: list[str] | None = None) -> int:
         _print_json(list_jobs(), ensure_ascii=False)
         return 0
 
+    # 演示案例 3 的执行位置：
+    # 用户选择 `install-materials` 后，CLI 把材料来源、库名、目标目录等参数交给
+    # `install_material_library()`。这个函数返回结构化结果；CLI 再决定输出 JSON 还是简短摘要。
     if args.command == "install-materials":
         result = install_material_library(
             args.source,
@@ -1185,6 +1250,8 @@ def main(argv: list[str] | None = None) -> int:
 
 def _material_result_summary(result) -> str:
     """Build a concise human-readable summary for material install output."""
+    # 给小白看的简短摘要在这里生成。
+    # 如果用户加了 `--json`，CLI 会跳过这个函数，直接打印完整 JSON。
     counts: dict[str, int] = {}
     for item in result.planned_files:
         counts[item.category] = counts.get(item.category, 0) + 1
@@ -1206,11 +1273,15 @@ def _material_result_summary(result) -> str:
 
 def _strip_remainder_separator(raw_args: list[str]) -> list[str]:
     """Remove argparse's leading `--` separator from remainder arguments."""
+    # 有些命令需要把剩余参数原样转交给 AutoForm 可执行文件。
+    # argparse 常用 `--` 作为“后面别再解析了”的分隔符，这里把这个分隔符去掉。
     return raw_args[1:] if raw_args and raw_args[0] == "--" else raw_args
 
 
 def _print_json(value, ensure_ascii: bool = False) -> None:
     """Print stable, indented JSON for command output and evidence capture."""
+    # 所有机器可读输出尽量走这个函数，保证缩进、UTF-8 编码和换行稳定。
+    # 这样命令行、测试脚本、MCP 外层包装读取结果时，格式更容易保持一致。
     text = json.dumps(value, ensure_ascii=ensure_ascii, indent=2)
     sys.stdout.buffer.write(text.encode("utf-8", errors="replace"))
     sys.stdout.buffer.write(b"\n")
@@ -1218,6 +1289,8 @@ def _print_json(value, ensure_ascii: bool = False) -> None:
 
 def _parse_env_overrides(items: list[str]) -> dict[str, str]:
     """Parse repeated `KEY=VALUE` CLI items into an environment override dict."""
+    # 部分求解或批处理命令允许用户临时覆盖环境变量。
+    # 这里把 `NAME=VALUE` 形式的参数变成字典，后续业务函数可以直接使用。
     overrides = {}
     for item in items:
         if "=" not in item:

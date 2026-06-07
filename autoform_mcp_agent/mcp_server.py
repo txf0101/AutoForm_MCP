@@ -16,6 +16,9 @@ from .mcp_tools import *  # Re-export MCP wrapper functions for older direct imp
 from .mcp_tools import EXPORTED_FUNCTION_NAMES, register_all_tools
 
 
+# 独立 AutoForm_MCP 仓库只暴露 MCP server，不包含完整网页主链路。
+# 外部 MCP host 启动这里后，会看到名为 autoform-mcp 的服务和一组 `autoform_` 工具。
+# 工具注册仍集中在 `autoform_mcp_agent.mcp_tools`，这个文件只负责“开门”和“挂工具”。
 mcp = FastMCP("autoform-mcp")
 register_all_tools(mcp)
 

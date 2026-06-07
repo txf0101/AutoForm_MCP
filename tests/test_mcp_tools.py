@@ -12,8 +12,8 @@ pytest.importorskip("mcp.server.fastmcp")
 
 def test_mcp_server_registers_all_tool_layers() -> None:
     """The stable MCP entry point should still expose the V1.0 tool surface."""
-    from autoform_agent import mcp_server
-    from autoform_agent.mcp_tools import ALL_TOOL_FUNCTIONS, MCP_TOOL_LAYERS
+    from autoform_mcp_agent import mcp_server
+    from autoform_mcp_agent.mcp_tools import ALL_TOOL_FUNCTIONS, MCP_TOOL_LAYERS
 
     tool_names = set(mcp_server.mcp._tool_manager._tools)
 
@@ -41,10 +41,46 @@ def test_mcp_server_registers_all_tool_layers() -> None:
 
 def test_mcp_server_keeps_status_resource_and_legacy_exports() -> None:
     """Existing imports from `mcp_server` should keep working after the split."""
-    from autoform_agent import mcp_server
+    from autoform_mcp_agent import mcp_server
 
     resource_uris = set(mcp_server.mcp._resource_manager._resources)
 
     assert "autoform://status" in resource_uris
     assert mcp_server.autoform_project_run.__name__ == "autoform_project_run"
     assert mcp_server.autoform_status_snapshot.__name__ == "autoform_status_snapshot"
+
+
+def test_result_set_view_wrapper_passes_window_filters(monkeypatch) -> None:
+    """The MCP wrapper should keep title and PID filters for follow-up view changes."""
+    from autoform_mcp_agent.mcp_tools import gui
+
+    calls = []
+
+    def fake_set_result_view(view, **kwargs):
+        calls.append((view, kwargs))
+        return {"status": "planned", "view": view, "filters": kwargs}
+
+    monkeypatch.setattr(gui, "set_result_view", fake_set_result_view)
+
+    result = gui.autoform_result_set_view(
+        "top",
+        execute=True,
+        verify_screenshot=False,
+        output_dir="tmp/result_review",
+        title_contains="Solver_R13.afd",
+        target_pid=2468,
+    )
+
+    assert result["status"] == "planned"
+    assert calls == [
+        (
+            "top",
+            {
+                "execute": True,
+                "verify_screenshot": False,
+                "output_dir": "tmp/result_review",
+                "title_contains": "Solver_R13.afd",
+                "target_pid": 2468,
+            },
+        )
+    ]

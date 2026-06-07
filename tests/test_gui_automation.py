@@ -3,7 +3,7 @@
 This test file checks visible AutoForm windows, screenshots, window restore, and GUI primitives. Read each assertion as one project promise: what input is accepted, what output must come back, and which risky actions must stay disabled by default.
 """
 
-import autoform_agent.gui_automation as gui_automation
+import autoform_mcp_agent.gui_automation as gui_automation
 
 
 def test_top_level_windows_keeps_results_when_enumwindows_has_no_error(monkeypatch) -> None:

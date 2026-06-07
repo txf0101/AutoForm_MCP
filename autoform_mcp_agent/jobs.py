@@ -25,7 +25,7 @@ except Exception:  # pragma: no cover - optional runtime guard
 
 
 JOB_SCHEMA_VERSION = "1.0"
-DEFAULT_JOB_ROOT = Path("autoform_agent_data") / "jobs"
+DEFAULT_JOB_ROOT = Path("autoform_mcp_agent_data") / "jobs"
 TEXT_PREVIEW_EXTENSIONS = {".log", ".txt", ".out", ".err", ".json"}
 
 

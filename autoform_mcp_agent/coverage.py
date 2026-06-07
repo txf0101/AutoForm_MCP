@@ -161,7 +161,7 @@ MODULE_COVERAGE = [
             "autoform_write_safety_plan",
             "autoform_internal_extension_boundary",
         ],
-        "evidence": ["autoform_agent/safety.py", "autoform_agent/extension.py", "tests/test_safety_extension.py"],
+        "evidence": ["autoform_mcp_agent/safety.py", "autoform_mcp_agent/extension.py", "tests/test_safety_extension.py"],
     },
     {
         "module": "Release packaging",

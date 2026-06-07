@@ -227,11 +227,11 @@ def autoform_status_snapshot(
         "errors": errors,
         "evidence": {
             "project_metadata": str(resolved_root / "pyproject.toml"),
-            "installation_probe": "autoform_agent.paths.discover_installations",
-            "queue_probe": "autoform_agent.queue.queue_health_check",
-            "quicklink_probe": "autoform_agent.quicklink.list_quicklink_exports",
-            "log_probe": "autoform_agent.diagnostics.collect_recent_autoform_logs",
-            "coverage_probe": "autoform_agent.coverage.module_coverage_matrix",
+            "installation_probe": "autoform_mcp_agent.paths.discover_installations",
+            "queue_probe": "autoform_mcp_agent.queue.queue_health_check",
+            "quicklink_probe": "autoform_mcp_agent.quicklink.list_quicklink_exports",
+            "log_probe": "autoform_mcp_agent.diagnostics.collect_recent_autoform_logs",
+            "coverage_probe": "autoform_mcp_agent.coverage.module_coverage_matrix",
         },
     }
 
@@ -357,10 +357,10 @@ def _service_defaults() -> dict:
     return {
         "mcp_stdio_server": {
             "command": "python",
-            "args": ["-m", "autoform_agent.mcp_server"],
+            "args": ["-m", "autoform_mcp_agent.mcp_server"],
             "resource": "autoform://status",
             "config_template": "codex_mcp_config.autoform-mcp.toml",
-            "evidence": "autoform_agent/mcp_server.py and autoform_agent/mcp_tools/",
+            "evidence": "autoform_mcp_agent/mcp_server.py and autoform_mcp_agent/mcp_tools/",
         },
     }
 

@@ -6,9 +6,9 @@ This test file checks project resolution, copying, solver runs, and official-exa
 import json
 from pathlib import Path
 
-import autoform_agent.project_workflow as workflow
-from autoform_agent.paths import AutoFormInstallation
-from autoform_agent.project_workflow import (
+import autoform_mcp_agent.project_workflow as workflow
+from autoform_mcp_agent.paths import AutoFormInstallation
+from autoform_mcp_agent.project_workflow import (
     example_project_baseline,
     official_sample_run_summary,
     project_run_workflow,

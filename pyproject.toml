@@ -1,6 +1,6 @@
 [project]
 name = "autoform-mcp"
-version = "1.1.0"
+version = "1.8.0"
 description = "Standalone stdio MCP server for local AutoForm helper workflows."
 requires-python = ">=3.10"
 dependencies = [

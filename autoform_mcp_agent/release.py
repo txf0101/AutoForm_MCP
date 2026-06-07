@@ -29,10 +29,12 @@ REQUIRED_RELEASE_FILES = [
     "codex_mcp_config.autoform-mcp.toml",
     "docs/beginner_onboarding_zh.md",
     "docs/api_runtime_call_chain.md",
-    "docs/gui_result_review_scope.md",
 ]
 
-PACKAGE_INCLUDE_DIRS = ["autoform_agent", "docs", "tests"]
+EXPECTED_VERSION = "1.8.0"
+RELEASE_LABEL = "1.8"
+
+PACKAGE_INCLUDE_DIRS = ["autoform_mcp_agent", "docs", "tests"]
 PACKAGE_INCLUDE_FILES = [
     ".env.example",
     "INSTALL.md",
@@ -54,19 +56,19 @@ def release_readiness_check(project_root: str | Path | None = None) -> dict:
     version = _pyproject_version(root / "pyproject.toml")
     license_check = _license_check(root / "LICENSE")
     public_scan = public_release_scan(root)
-    ready = not missing and version == "1.1.0" and license_check["is_mit"] and public_scan["safe_to_publish"]
+    ready = not missing and version == EXPECTED_VERSION and license_check["is_mit"] and public_scan["safe_to_publish"]
     return {
-        "schema_version": "1.1",
+        "schema_version": "1.8",
         "checked_at": _utc_now(),
         "project_root": str(root),
         "ready": ready,
         "missing_files": missing,
         "version": version,
-        "version_ready": version == "1.1.0",
+        "version_ready": version == EXPECTED_VERSION,
         "license": license_check,
         "public_release_scan": public_scan,
         "required_files": files,
-        "package_plan": release_package_plan(root / "output" / "release" / "autoform-mcp-1.1", project_root=root, dry_run=True),
+        "package_plan": release_package_plan(root / "output" / "release" / f"autoform-mcp-{RELEASE_LABEL}", project_root=root, dry_run=True),
     }
 
 
@@ -94,14 +96,14 @@ def release_package_plan(
                 planned_files.append(_copy_plan(source, destination / source.relative_to(root), root))
 
     plan = {
-        "schema_version": "1.1",
+        "schema_version": "1.8",
         "created_at": _utc_now(),
         "project_root": str(root),
         "destination": str(destination),
         "dry_run": dry_run,
         "file_count": len(planned_files),
         "planned_files": planned_files,
-        "exclusions": ["output", "tmp", ".pytest_cache", "autoform_agent_data", ".env", "__pycache__"],
+        "exclusions": ["output", "tmp", ".pytest_cache", "autoform_mcp_agent_data", ".env", "__pycache__"],
     }
     if dry_run:
         return plan
@@ -145,8 +147,8 @@ def install_check_plan(project_root: str | Path | None = None) -> dict:
             },
             {
                 "name": "check_status",
-                "command": "python -m autoform_agent.cli status",
-                "evidence": "autoform_agent.diagnostics.autoform_status_snapshot",
+                "command": "python -m autoform_mcp_agent.cli status",
+                "evidence": "autoform_mcp_agent.diagnostics.autoform_status_snapshot",
                 "required": True,
             },
             {

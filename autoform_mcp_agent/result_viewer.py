@@ -47,13 +47,13 @@ ANIMATION_CONTROL_PROFILES: dict[str, dict] = {
             "label": "bottom time-step strip profiled control",
             "x": 0.815,
             "y": 0.92,
-            "source": "docs/gui_result_review_scope.md",
+            "source": "tmp/autoform_animation_attempt/autoform_result_evidence_20260531_171641_174969.png",
         },
         "visual_validation": {
             "crop_fraction": (0.15, 0.12, 0.82, 0.70),
             "min_result_view_changed_pixel_ratio": 0.005,
             "min_result_view_mean_delta": 0.10,
-            "source": "docs/gui_result_review_scope.md",
+            "source": "tmp/result_review_auto_play_v1_1_geometry_guard_probe before and after capture",
         },
         "evidence_boundary": (
             "This profile is limited to the locally observed AutoComp_R13 result window. "
@@ -279,13 +279,15 @@ GUI_EVIDENCE_RECORDS: tuple[GuiEvidenceRecord, ...] = (
             "the project was saved before recalculation."
         ),
         source_claims=(
-            "docs/gui_result_review_scope.md keeps output-density GUI work as observed workflow context.",
-            "autoform_agent/process.py and autoform_agent/project_workflow.py keep execution behind explicit dry-run or execute flags.",
+            "run_recap.md records the GUI path, Each Time Step setting, Apply, save, and recalculation.",
+            "20260531_180914_real_sim_output_frames.md records helpLinks.cfg, F_Std_CtrPar, and "
+            "Business_FormingStandard.dll evidence for the Output nominal option.",
         ),
         evidence_paths=(
-            "docs/gui_result_review_scope.md",
-            "autoform_agent/process.py",
-            "autoform_agent/project_workflow.py",
+            "output/project_runs/frame_rate_experiment/AutoComp_R13_every_time_step_20260531_185003/run_recap.md",
+            "output/session_reviews/20260531_180914_real_sim_output_frames.md",
+            r"D:\Program Files\AutoForm\AFplus\R13F\bin\F_Std_CtrPar",
+            r"D:\Program Files\AutoForm\AFplus\R13F\bin\Business_FormingStandard.dll",
         ),
         observed_controls=(
             "Simulation > Control > Output",
@@ -315,14 +317,26 @@ GUI_EVIDENCE_RECORDS: tuple[GuiEvidenceRecord, ...] = (
             "now confirmed a result-view crop change on the local AutoComp_R13 window."
         ),
         source_claims=(
-            "docs/gui_result_review_scope.md describes the guarded AutoComp_R13 bottom-strip profile and manual fallback.",
-            "autoform_agent/result_viewer.py implements window-geometry guarding and screenshot-difference validation.",
-            "tests/test_result_viewer.py covers guarded playback, visual-change checks, geometry-change rejection, and fallback behavior.",
+            "run_recap.md records successful four-iteration recalculation and bottom time-step playback behavior.",
+            "Local screenshots in tmp/autoform_animation_attempt capture bottom playback controls from the result window.",
+            "tmp/result_review_validation and tmp/result_review_validation_right_icon record live MCP click trials where the result-view crop did not change.",
+            "tmp/result_review_drag_probe records a live MCP drag trial that did not change the result-view crop.",
+            "tmp/result_review_auto_play_v1_1_geometry_guard_probe records the 2026-06-02 guarded click success after geometry-change false positives were blocked.",
         ),
         evidence_paths=(
-            "docs/gui_result_review_scope.md",
-            "autoform_agent/result_viewer.py",
-            "tests/test_result_viewer.py",
+            "output/project_runs/frame_rate_experiment/AutoComp_R13_every_time_step_20260531_185003/run_recap.md",
+            "tmp/autoform_animation_attempt/bottom_controls_crop.png",
+            "tmp/autoform_animation_attempt/bottom_play_controls_crop.png",
+            "tmp/autoform_animation_attempt/bottom_strip_crop.png",
+            "tmp/autoform_probe_after_high_frame.png",
+            "tmp/result_review_validation/autoform_result_evidence_20260531_212323_601088.png",
+            "tmp/result_review_validation/autoform_result_evidence_20260531_212327_757889.png",
+            "tmp/result_review_validation_right_icon/autoform_result_evidence_20260531_212346_000976.png",
+            "tmp/result_review_validation_right_icon/autoform_result_evidence_20260531_212349_879347.png",
+            "tmp/result_review_drag_probe/before_drag.png",
+            "tmp/result_review_drag_probe/after_drag.png",
+            "tmp/result_review_auto_play_v1_1_geometry_guard_probe/autoform_result_evidence_20260602_160536_313451.png",
+            "tmp/result_review_auto_play_v1_1_geometry_guard_probe/autoform_result_evidence_20260602_160540_465427.png",
         ),
         observed_controls=(
             "bottom time-step strip",
@@ -350,12 +364,12 @@ GUI_EVIDENCE_RECORDS: tuple[GuiEvidenceRecord, ...] = (
             "V1.1 stable-demo scope and remains a V1.2 or later task."
         ),
         source_claims=(
-            "docs/gui_result_review_scope.md keeps exact frame-count reading outside the V1.1 public scope.",
-            "autoform_agent/result_viewer.py reports frame count as unknown instead of inventing a value.",
+            "20260531_180914_real_sim_output_frames.md lists result frame count reading as a follow-up requirement.",
+            "run_recap.md confirms playback availability but does not report a numeric frame count.",
         ),
         evidence_paths=(
-            "docs/gui_result_review_scope.md",
-            "autoform_agent/result_viewer.py",
+            "output/session_reviews/20260531_180914_real_sim_output_frames.md",
+            "output/project_runs/frame_rate_experiment/AutoComp_R13_every_time_step_20260531_185003/run_recap.md",
         ),
         limitations=("No stable API, export, or log parser has been confirmed for exact result frame counts.",),
         next_actions=(
@@ -377,7 +391,7 @@ GUI_EVIDENCE_RECORDS: tuple[GuiEvidenceRecord, ...] = (
             "The same visual validation used by the guarded click profile checks the central result-view crop.",
         ),
         evidence_paths=(
-            "autoform_agent/result_viewer.py",
+            "autoform_mcp_agent/result_viewer.py",
             "tests/test_result_viewer.py",
         ),
         observed_controls=("user-operated AutoForm playback control", "MCP before and after screenshot capture"),
@@ -405,8 +419,8 @@ GUI_EVIDENCE_RECORDS: tuple[GuiEvidenceRecord, ...] = (
             "tests/test_result_viewer.py covers dialog classification and readiness blocking.",
         ),
         evidence_paths=(
-            "autoform_agent/gui_automation.py",
-            "autoform_agent/result_viewer.py",
+            "autoform_mcp_agent/gui_automation.py",
+            "autoform_mcp_agent/result_viewer.py",
             "tests/test_result_viewer.py",
         ),
         observed_controls=("AutoForm top-level window title", "Win32 class name", "window visibility", "window rectangle"),
@@ -431,12 +445,12 @@ GUI_EVIDENCE_RECORDS: tuple[GuiEvidenceRecord, ...] = (
         ),
         source_claims=(
             "2026-06-01 live AutoComp_R13 validation confirmed result-set-view --execute for E, Z, X, and Shift+Y.",
-            "docs/gui_result_review_scope.md keeps fit-window toolbar automation and direct reset discovery outside V1.1 stable-demo scope.",
+            "docs/v1_1_gui_result_review_goals.md now keeps fit-window toolbar automation and direct reset discovery outside V1.1 stable-demo scope.",
         ),
         evidence_paths=(
-            "docs/gui_result_review_scope.md",
-            "autoform_agent/result_viewer.py",
-            "tests/test_result_viewer.py",
+            "docs/v1_1_gui_result_review_goals.md",
+            "autoform_mcp_agent/result_viewer.py",
+            "output/session_reviews/20260601_mcp_v1_1_view_control_live_evidence_recap.md",
         ),
         limitations=(
             "Toolbar-only fit-window automation is sensitive to ribbon layout and is deferred.",
@@ -457,9 +471,9 @@ GUI_EVIDENCE_RECORDS: tuple[GuiEvidenceRecord, ...] = (
             "parameter-write path is deferred until a copied-project round trip is proven."
         ),
         source_claims=(
-            "docs/gui_result_review_scope.md keeps direct output-density parameter writing outside the V1.1 public scope.",
+            "20260531_180914_real_sim_output_frames.md records that direct step-length writing was not yet reliable.",
         ),
-        evidence_paths=("docs/gui_result_review_scope.md",),
+        evidence_paths=("output/session_reviews/20260531_180914_real_sim_output_frames.md",),
         limitations=("Use the GUI-observed path or return a plan until the direct writer is verified.",),
         next_actions=("Keep direct parameter writes behind dry-run planning and handle the writer in the V1.2 evidence package.",),
     ),
@@ -710,7 +724,7 @@ def result_review_blockers(scope: str = "v1_1", *, include_completed: bool = Fal
             "evidence": [
                 "2026-06-01 live AutoComp_R13 validation confirmed result-set-view --execute for E, Z, X, and Shift+Y.",
                 "RESULT_VIEWS marks isometric, top, front, and side as shortcut_profile_verified_20260601.",
-                "docs/gui_result_review_scope.md records the public V1.1 view-control boundary.",
+                "output/session_reviews/20260601_mcp_v1_1_view_control_live_evidence_recap.md records the live evidence path.",
             ],
             "recommended_countermeasure": (
                 "Use shortcut view profiles in the V1.1 demo. Keep toolbar fit-window automation and direct reset discovery in V1.2."
@@ -728,8 +742,8 @@ def result_review_blockers(scope: str = "v1_1", *, include_completed: bool = Fal
             "evidence": [
                 "manual_user_playback captures before and after screenshots without sending AutoForm clicks.",
                 "tests/test_result_viewer.py covers the manual playback observation success path.",
-                "docs/gui_result_review_scope.md records why the manual profile remains the portable fallback.",
-                "tests/test_result_viewer.py covers guarded click execution with stable window geometry and result-view visual change.",
+                "output/session_reviews/20260531_mcp_v1_1_manual_playback_observation_recap.md records why this profile is the V1.1 stable demo path.",
+                "tmp/result_review_auto_play_v1_1_geometry_guard_probe records a 2026-06-02 guarded click with stable window geometry and result-view visual change.",
             ],
             "recommended_countermeasure": (
                 "Use autocomp_r13_bottom_strip for the local AutoComp_R13 V1.1 demo after readiness passes; use manual_user_playback when the project or layout differs."
@@ -1982,15 +1996,15 @@ def _view_control_evidence_plan(output_dir: Path) -> dict:
                 "view": view_key,
                 "label": item["label"],
                 "before_command": (
-                    "python -m autoform_agent.cli result-view-evidence "
+                    "python -m autoform_mcp_agent.cli result-view-evidence "
                     f"--view {view_key} --phase before --execute --output-dir {output_dir}"
                 ),
                 "after_command": (
-                    "python -m autoform_agent.cli result-view-evidence "
+                    "python -m autoform_mcp_agent.cli result-view-evidence "
                     f"--view {view_key} --phase after --execute --output-dir {output_dir}"
                 ),
                 "compare_command": (
-                    "python -m autoform_agent.cli result-view-evidence "
+                    "python -m autoform_mcp_agent.cli result-view-evidence "
                     f"--view {view_key} --phase compare --output-dir {output_dir}"
                 ),
                 "operator_instruction": _view_control_operator_instruction(item),

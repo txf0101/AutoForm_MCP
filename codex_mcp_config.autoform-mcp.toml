@@ -1,4 +1,4 @@
-# AutoForm_MCP MCP_V1.1 config snippet for Codex or another TOML-based MCP host.
+# AutoForm_MCP MCP_V1.8 config snippet for Codex or another TOML-based MCP host.
 #
 # Copy this block into:
 #   %USERPROFILE%\.codex\config.toml
@@ -9,11 +9,11 @@
 #
 # If the host cannot find conda, replace command with the full path to
 # your afagent environment python.exe and change args to:
-#   ['-m', 'autoform_agent.mcp_server']
+#   ['-m', 'autoform_mcp_agent.mcp_server']
 
 [mcp_servers."autoform-mcp"]
 command = 'conda'
-args = ['run', '-n', 'afagent', 'python', '-m', 'autoform_agent.mcp_server']
+args = ['run', '-n', 'afagent', 'python', '-m', 'autoform_mcp_agent.mcp_server']
 startup_timeout_sec = 60
 enabled = true
 

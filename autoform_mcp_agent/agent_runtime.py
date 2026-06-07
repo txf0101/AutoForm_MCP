@@ -503,7 +503,7 @@ def _build_local_runtime_result(
         time=_utc_now(),
         timeline=_runtime_timeline(openai_called=False, snapshot=snapshot, config=config),
         preview=_runtime_preview(
-            active_tool="autoform_agent_runtime",
+            active_tool="autoform_mcp_agent_runtime",
             phase="Backend Runtime",
             title="Python 后端运行时",
             subtitle=reason,

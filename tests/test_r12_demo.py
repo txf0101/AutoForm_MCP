@@ -5,7 +5,7 @@ This test file checks the R12 project-open and view-switch demo. Each assertion 
 
 from pathlib import Path
 
-import autoform_agent.r12_demo as r12_demo
+import autoform_mcp_agent.r12_demo as r12_demo
 
 
 def _resolved_project(path: Path) -> dict:
@@ -28,8 +28,47 @@ def test_r12_project_view_demo_dry_run_plans_without_gui_side_effects(monkeypatc
     assert result["schema_version"] == "autoform.r12.project_view_demo.v1"
     assert result["status"] == "planned_not_executed"
     assert result["approval_required"] is True
-    assert result["view_sequence"] == ["top", "isometric"]
-    assert [stage["stage"] for stage in result["stages"]] == ["open_project", "set_top_view", "set_isometric_view"]
+    assert result["view_sequence"] == []
+    assert [stage["stage"] for stage in result["stages"]] == ["open_project"]
+
+
+def test_r12_project_view_demo_execute_without_view_sequence_only_opens_project(monkeypatch, tmp_path: Path) -> None:
+    project = tmp_path / "Solver_R13.afd"
+    monkeypatch.setattr(r12_demo, "resolve_project_input", lambda **_kwargs: _resolved_project(project))
+    monkeypatch.setattr(
+        r12_demo,
+        "open_afd_observer",
+        lambda path, dry_run=True: {
+            "mode": "gui_project_observer",
+            "dry_run": dry_run,
+            "launched": not dry_run,
+            "pid": 1234,
+            "project_path": str(path),
+        },
+    )
+    ready_snapshot = {
+        "window_count": 1,
+        "interaction_ready_window_count": 1,
+        "interaction_ready_windows": [{"title": "AutoForm Forming R13 - Solver_R13.afd"}],
+        "windows": [{"title": "AutoForm Forming R13 - Solver_R13.afd"}],
+    }
+    monkeypatch.setattr(r12_demo, "autoform_window_snapshot", lambda **_kwargs: ready_snapshot)
+    calls = []
+    monkeypatch.setattr(r12_demo, "set_result_view", lambda view, **kwargs: calls.append((view, kwargs)))
+
+    result = r12_demo.r12_project_view_demo(
+        execute=True,
+        wait_seconds=0,
+        view_wait_seconds=0,
+        verify_screenshot=False,
+        output_dir=tmp_path,
+    )
+
+    assert result["status"] == "completed"
+    assert result["view_sequence"] == []
+    assert result["view_results"] == []
+    assert calls == []
+    assert [stage["stage"] for stage in result["stages"]] == ["open_project", "window_ready_check"]
 
 
 def test_r12_project_view_demo_execute_opens_project_then_switches_views(monkeypatch, tmp_path: Path) -> None:
@@ -77,6 +116,7 @@ def test_r12_project_view_demo_execute_opens_project_then_switches_views(monkeyp
         wait_seconds=0,
         view_wait_seconds=0,
         verify_screenshot=False,
+        view_sequence=["top", "isometric"],
         output_dir=tmp_path,
     )
 
@@ -97,3 +137,47 @@ def test_r12_project_view_demo_execute_opens_project_then_switches_views(monkeyp
         "set_top_view",
         "set_isometric_view",
     ]
+
+
+def test_r12_project_view_demo_accepts_single_view_sequence(monkeypatch, tmp_path: Path) -> None:
+    project = tmp_path / "Solver_R13.afd"
+    monkeypatch.setattr(r12_demo, "resolve_project_input", lambda **_kwargs: _resolved_project(project))
+    monkeypatch.setattr(
+        r12_demo,
+        "open_afd_observer",
+        lambda path, dry_run=True: {
+            "mode": "gui_project_observer",
+            "dry_run": dry_run,
+            "launched": not dry_run,
+            "pid": 4321,
+            "project_path": str(path),
+        },
+    )
+    ready_snapshot = {
+        "window_count": 1,
+        "interaction_ready_window_count": 1,
+        "interaction_ready_windows": [{"title": "AutoForm Forming R13 - Solver_R13.afd"}],
+        "windows": [{"title": "AutoForm Forming R13 - Solver_R13.afd"}],
+    }
+    monkeypatch.setattr(r12_demo, "autoform_window_snapshot", lambda **_kwargs: ready_snapshot)
+    calls = []
+
+    def fake_set_result_view(view, **kwargs):
+        calls.append((view, kwargs))
+        return {"status": "view_change_confirmed", "executed": True}
+
+    monkeypatch.setattr(r12_demo, "set_result_view", fake_set_result_view)
+
+    result = r12_demo.r12_project_view_demo(
+        execute=True,
+        wait_seconds=0,
+        view_wait_seconds=0,
+        verify_screenshot=False,
+        view_sequence=["top"],
+        output_dir=tmp_path,
+    )
+
+    assert result["status"] == "completed"
+    assert result["view_sequence"] == ["top"]
+    assert [item[0] for item in calls] == ["top"]
+    assert [stage["stage"] for stage in result["stages"]] == ["open_project", "window_ready_check", "set_top_view"]

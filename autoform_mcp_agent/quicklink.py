@@ -33,9 +33,9 @@ def bridge_script_text(workspace: Path, python_executable: str | None = None) ->
         "chcp 65001 >nul",
         "set \"QUICKLINK_ARCHIVE=%~1\"",
         # AutoForm runs scripts from its own scripts directory, so the project
-        # root is added explicitly for `python -m autoform_agent...`.
+        # root is added explicitly for `python -m autoform_mcp_agent...`.
         f"set \"PYTHONPATH={workspace};%PYTHONPATH%\"",
-        f'"{python_executable}" -m autoform_agent.quicklink_bridge "%QUICKLINK_ARCHIVE%" --workspace "{workspace}"',
+        f'"{python_executable}" -m autoform_mcp_agent.quicklink_bridge "%QUICKLINK_ARCHIVE%" --workspace "{workspace}"',
         "exit /b %ERRORLEVEL%",
         "",
     ]
@@ -381,7 +381,7 @@ def validate_quicklink_standard(path: Path) -> dict:
 
 def _quicklink_data_dir(workspace: Path) -> Path:
     """Return the workspace directory where bridge exports are collected."""
-    return workspace.resolve() / "autoform_agent_data" / "quicklink"
+    return workspace.resolve() / "autoform_mcp_agent_data" / "quicklink"
 
 
 def _read_manifest(path: Path) -> dict:

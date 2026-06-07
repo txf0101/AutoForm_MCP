@@ -44,11 +44,12 @@ class AutoFormInstallation:
 
     @property
     def version_dir_name(self) -> str:
-        """Return the folder name used below `%ProgramData%\\AutoForm\\AFplus`.
+        """Return the folder name used below `C:\\ProgramData\\AutoForm\\AFplus`.
 
         AutoForm R13 installs into a directory such as `R13F`; the same token is
-        used in ProgramData. Users can override product layouts with
-        `AUTOFORM_VERSION_DIR` when a target machine uses a different layout.
+        used in ProgramData.  This assumption is based on the current local
+        installation evidence and is the first place to revisit for other
+        AutoForm product layouts.
         """
         override = _env_path_text(ENV_VERSION_DIR)
         if override:
@@ -93,9 +94,7 @@ class AutoFormInstallation:
             return exact_override
         # AutoForm keeps mutable product data under ProgramData, while executables
         # live under the installation directory in Program Files.
-        system_drive = os.environ.get("SystemDrive")
-        fallback_program_data = str(Path(system_drive) / "ProgramData") if system_drive else "ProgramData"
-        program_data = Path(os.environ.get("PROGRAMDATA", fallback_program_data))
+        program_data = Path(os.environ.get("PROGRAMDATA", r"C:\ProgramData"))
         return program_data / "AutoForm" / "AFplus" / self.version_dir_name
 
     @property
@@ -279,12 +278,11 @@ def _read_reg_value(winreg_module, key, name: str) -> str | None:
 def _fallback_installations() -> list[AutoFormInstallation]:
     """Use conservative defaults for machines where registry reads are blocked."""
 
-    base_dirs = []
-    for env_name in ("ProgramFiles", "ProgramFiles(x86)"):
-        value = os.environ.get(env_name)
-        if value:
-            base_dirs.append(Path(value))
-    candidates = [base / "AutoForm" / "AFplus" / "R13F" for base in base_dirs]
+    candidates = [
+        Path(r"D:\Program Files\AutoForm\AFplus\R13F"),
+        Path(r"C:\Program Files\AutoForm\AFplus\R13F"),
+        Path(r"C:\Program Files (x86)\AutoForm\AFplus\R13F"),
+    ]
     return [
         AutoFormInstallation(
             display_name="AutoForm Forming R13",
